@@ -30,12 +30,20 @@ class HttpExchange {
         }
         return this
     }
-
+    /*--- REST Glue ---*/
     public HttpExchange $get(String routeTemplate, Closure work) {
        return this.route("GET", routeTemplate, work)
     }
 
+    public HttpExchange get(String routeTemplate, Closure work) {
+        return this.route("GET", routeTemplate, work)
+    }
+
     public HttpExchange $post(String routeTemplate, Closure work) {
+        return this.route("POST", routeTemplate, work)
+    }
+
+    public HttpExchange post(String routeTemplate, Closure work) {
         return this.route("POST", routeTemplate, work)
     }
 
@@ -43,7 +51,15 @@ class HttpExchange {
         return this.route("PUT", routeTemplate, work)
     }
 
+    public HttpExchange put(String routeTemplate, Closure work) {
+        return this.route("PUT", routeTemplate, work)
+    }
+
     public HttpExchange $delete(String routeTemplate, Closure work) {
+        return this.route("DELETE", routeTemplate, work)
+    }
+
+    public HttpExchange delete(String routeTemplate, Closure work) {
         return this.route("DELETE", routeTemplate, work)
     }
 
@@ -98,7 +114,5 @@ class HttpExchange {
 
         return this
     }
-
-    /*TODO: REST Glue*/
 
 }
