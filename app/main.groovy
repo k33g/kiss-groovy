@@ -13,6 +13,9 @@ def server = new KissHttpServer("localhost", 3008,{ HttpExchange app ->
 
     app.staticContents("/public", "index.html")
 
+    app get "/hello" { Response res, Request req -> res.json(["message":"hello"]) }
+
+
     app.get("/humans", { Response res, Request req ->
         res.json(humans)
     })
