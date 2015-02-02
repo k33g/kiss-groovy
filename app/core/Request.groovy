@@ -6,44 +6,41 @@ import groovy.json.JsonSlurper
  * Created by k33g_org on 31/01/15.
  */
 class Request {
-    public String data
-    public com.sun.net.httpserver.HttpExchange exchange
-    public HashMap parameters
+  String data
+  com.sun.net.httpserver.HttpExchange exchange
+  HashMap parameters
 
-    public Request() {
+  Request() {}
 
-    }
-    public Request(String data, com.sun.net.httpserver.HttpExchange exchange, HashMap parameters) {
-        this.data = data
-        this.exchange = exchange
-        this.parameters = parameters
-    }
+  Request(String data, com.sun.net.httpserver.HttpExchange exchange, HashMap parameters) {
+    this.data = data
+    this.exchange = exchange
+    this.parameters = parameters
+  }
 
-    public params(String key) {
-        return this.parameters.get(key)
-    }
-    public String method() {
-        return this.exchange.getRequestMethod()
-    }
-    public URI uri() {
-        return this.exchange.getRequestURI()
-    }
-    public Headers headers() {
-        return this.exchange.getRequestHeaders()
-    }
+  Object params(String key) {
+    return this.parameters.get(key)
+  }
+  String method() {
+    return this.exchange.getRequestMethod()
+  }
+  URI uri() {
+    return this.exchange.getRequestURI()
+  }
+  Headers headers() {
+    return this.exchange.getRequestHeaders()
+  }
 
-    public json() {
-        def jsonSlurper = new JsonSlurper()
-        return jsonSlurper.parseText(this.data ? this.data : "{}")
+  Object json() {
+    JsonSlurper jsonSlurper = new JsonSlurper()
+    return jsonSlurper.parseText(this.data ? this.data : "{}")
+  }
+
+  String[] splitRoute() {
+    return this.uri().toString().split("/").toList().findAll {
+      part -> !part.equals("")
     }
+  }
 
-
-    public String[] splitRoute() {
-        return this.uri().toString().split("/").toList().findAll {
-            part ->
-                !part.equals("")
-        }
-    }
-
-    /*TODO: cookies*/
+  /*TODO: cookies*/
 }
